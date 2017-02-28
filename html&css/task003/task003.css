@@ -1,0 +1,155 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    height: 100%;
+}
+
+.point {
+    background-color: lightblue;
+    padding: 8px;
+}
+
+.box {
+    position: relative;
+    background-color: #ddd;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.img {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-color: indianred;
+}
+
+
+/*float布局*/
+
+article,
+#team,
+#person,
+#team2,
+#person2,
+#team3,
+#person3 {
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+article {
+    width: auto;
+    height: 100%;
+    background-color: lightpink;
+    margin-left: 220px;
+    margin-right: 140px;
+}
+
+#team,
+#team2,
+#team3 {
+    width: 200px;
+    height: 100%;
+    background-color: yellow
+}
+
+#team {
+    float: left;
+}
+
+#team p {
+    float: right;
+}
+
+#person,
+#person2,
+#person3 {
+    width: 120px;
+    height: 100%;
+    background-color: skyblue;
+}
+
+#person {
+    float: right;
+}
+
+#person .img,
+#person2 .img,
+#person3 .img {
+    margin-bottom: 20px;
+}
+
+#person .img:last-child,
+#person2 .img:last-child,
+#person3.img:last-child {
+    margin-bottom: 0;
+}
+
+
+/*position布局*/
+
+.position {
+    background-color: #ddd;
+    position: relative;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+#team2 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    height: auto;
+}
+
+#team2 p {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+#person2 {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: auto;
+}
+
+
+/*flex布局*/
+
+.flex {
+    display: flex;
+    background-color: #ddd;
+    padding: 20px;
+}
+
+.flex article {
+    margin: 0 20px;
+    ;
+}
+
+#team3,
+#person3 {
+    padding: 20px;
+}
+
+#team3 {
+    flex: 0 0 200px;
+    display: flex;
+}
+
+#team3 .img {
+    flex: 0 0 80px;
+}
+
+#team3 p {
+    flex: 1;
+    text-align: right;
+}
