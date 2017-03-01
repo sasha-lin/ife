@@ -34,6 +34,7 @@
         var right_in = document.getElementById('rightIn');
         var left_Out = document.getElementById('leftOut');
         var right_Out = document.getElementById('rightOut');
+        var block = document.getElementsByClassName('block');
         var arr = [];
 
         function render() {
@@ -42,6 +43,11 @@
                 html = html + '<div class="block">' + element + '</div>';
             });
             box.innerHTML = html;
+            // console.log(block.length);
+            for (var i = 0; i < block.length; i++) {
+                console.log(block.item(i));
+                block.item(i).addEventListener('click', blockClick);
+            };
         }
 
         function leftIn() {
@@ -57,14 +63,29 @@
         };
 
         function leftOut() {
-            arr.shift();
+            var o = arr.shift();
             render();
+            alert(o);
         };
 
         function rightOut() {
-            arr.pop();
+            var o = arr.pop();
             render();
+            alert(o);
         };
+
+        function blockClick() {
+            box.removeChild(this);
+            arr = [];
+            var block2 = document.getElementsByClassName('block');
+            for (var i = 0; i < block2.length; i++) {
+
+                arr.push(block2.item(i).innerText);
+            };
+            console.log(arr);
+            return arr;
+        };
+
         left_in.addEventListener('click', leftIn);
         right_in.addEventListener('click', rightIn);
         left_Out.addEventListener('click', leftOut);
