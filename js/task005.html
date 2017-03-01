@@ -51,6 +51,7 @@
     <button id="rightIn">右侧进</button>
     <button id="leftOut">左侧出</button>
     <button id="rightOut">右侧出</button>
+    <button id="sort">冒泡排序</button>
     <div id="main">
         <div id="box">
             <!--<div class="block"></div>-->
@@ -63,6 +64,7 @@
         var left_Out = document.getElementById('leftOut');
         var right_Out = document.getElementById('rightOut');
         var block = document.getElementsByClassName('block');
+        var bsort = document.getElementById('sort');
         var pos = 0;
         var arr = [];
         var colors = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
@@ -83,7 +85,7 @@
         }
 
         function leftIn() {
-            var input_value = document.getElementById('block-input').value;
+            var input_value = Number(document.getElementById('block-input').value);
             if (number(input_value) === 0) {
 
                 arr.unshift(input_value);
@@ -93,7 +95,7 @@
         };
 
         function rightIn() {
-            var input_value = document.getElementById('block-input').value;
+            var input_value = Number(document.getElementById('block-input').value);
             if (number(input_value) === 0) {
 
                 arr.push(input_value);
@@ -119,16 +121,45 @@
             var block2 = document.getElementsByClassName('block');
             for (var i = 0; i < block2.length; i++) {
 
-                arr.push(block2.item(i).innerText);
+                arr.push(Number(block2.item(i).innerText.trim()));
             };
             console.log(arr);
             return arr;
         };
 
+        function swap(myArray, p1, p2) {
+            var temp = myArray[p1];
+            myArray[p1] = myArray[p2];
+            myArray[p2] = temp;
+        }
+
+        function sortMaopao(arr) {
+            var len = arr.length;
+            var i;
+            var j;
+            var stop;
+
+            for (i = 0; i < len - 1; i++) {
+                for (j = 0, stop = len - 1 - i; j < stop; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        swap(arr, j, j + 1);
+                    }
+                }
+            }
+
+            return arr;
+        }
+
+        function fsort() {
+            console.log('1');
+            sortMaopao(arr);
+            render();
+        }
+
         function number(v) {
 
-            if (!(v >= 1 && v <= 100)) {
-                alert('请输入1～100！');
+            if (!(v >= 10 && v <= 100)) {
+                alert('请输入10～100！');
                 document.getElementById('block-input').value = '';
                 return 1;
             } else if (!(arr.length >= 0 && arr.length <= 60)) {
@@ -143,6 +174,7 @@
         right_in.addEventListener('click', rightIn);
         left_Out.addEventListener('click', leftOut);
         right_Out.addEventListener('click', rightOut);
+        bsort.addEventListener('click', fsort);
     </script>
 </body>
 
