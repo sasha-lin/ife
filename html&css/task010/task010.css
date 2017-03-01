@@ -12,13 +12,13 @@
 
 .flex-item {
     box-sizing: border-box;
-    width: 200px;
+    width: 150px;
     border: 1px solid #f00;
     margin-bottom: 20px;
 }
 
 .flex-item.blue {
-    border: 1px solid blue;
+    border: 1px solid #0f0;
 }
 
 .flex-item:first-child {
@@ -41,7 +41,7 @@
     .flex {
         align-items: flex-start;
         flex-wrap: wrap;
-        justify-content: space-around;
+        /*justify-content: space-around;*/
     }
     .flex-item.blue {
         order: -1;
