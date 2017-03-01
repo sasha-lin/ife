@@ -1,0 +1,75 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 04</title>
+    <style>
+        .block {
+            display: inline-block;
+            line-height: 30px;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            margin-top: 5px;
+            margin-right: 5px;
+            background-color: red;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <input id="block-input">
+    <button id="leftIn">左侧进</button>
+    <button id="rightIn">右侧进</button>
+    <button id="leftOut">左侧出</button>
+    <button id="rightOut">右侧出</button>
+    <div id="box">
+        <!--<div class="block"></div>-->
+    </div>
+    <script>
+        var box = document.getElementById('box');
+        var left_in = document.getElementById('leftIn');
+        var right_in = document.getElementById('rightIn');
+        var left_Out = document.getElementById('leftOut');
+        var right_Out = document.getElementById('rightOut');
+        var arr = [];
+
+        function render() {
+            var html = '';
+            arr.forEach(function(element, index, array) {
+                html = html + '<div class="block">' + element + '</div>';
+            });
+            box.innerHTML = html;
+        }
+
+        function leftIn() {
+            var input_value = document.getElementById('block-input').value;
+            arr.unshift(input_value);
+            render();
+        };
+
+        function rightIn() {
+            var input_value = document.getElementById('block-input').value;
+            arr.push(input_value);
+            render();
+        };
+
+        function leftOut() {
+            arr.shift();
+            render();
+        };
+
+        function rightOut() {
+            arr.pop();
+            render();
+        };
+        left_in.addEventListener('click', leftIn);
+        right_in.addEventListener('click', rightIn);
+        left_Out.addEventListener('click', leftOut);
+        right_Out.addEventListener('click', rightOut);
+    </script>
+</body>
+
+</html>
