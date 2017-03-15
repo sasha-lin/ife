@@ -1,0 +1,118 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 04</title>
+    <style>
+        .block {
+            display: inline-block;
+            line-height: 30px;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            margin-top: 5px;
+            margin-right: 5px;
+            background-color: red;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="block-textarea"></textarea>
+    <textarea id='block-search'></textarea>
+    <button id="leftIn">左侧进</button>
+    <button id="rightIn">右侧进</button>
+    <button id="leftOut">左侧出</button>
+    <button id="rightOut">右侧出</button>
+    <div id="box">
+        <!--<div class="block"></div>-->
+    </div>
+    <script>
+        var box = document.getElementById('box');
+        var left_in = document.getElementById('leftIn');
+        var right_in = document.getElementById('rightIn');
+        var left_Out = document.getElementById('leftOut');
+        var right_Out = document.getElementById('rightOut');
+        var block = document.getElementsByClassName('block');
+        var arr = [];
+
+        function render() {
+            var html = '';
+            arr.forEach(function(element, index, array) {
+                html = html + '<div class="block">' + element + '</div>';
+            });
+            box.innerHTML = html;
+            // console.log(block.length);
+            for (var i = 0; i < block.length; i++) {
+                console.log(block.item(i));
+                block.item(i).addEventListener('click', blockClick);
+            };
+        }
+
+        function leftIn() {
+            var textarea_value = document.getElementById('block-textarea').value;
+            var arr2 = textarea_value.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(e) {
+                if (e != null && e.length > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            arr2.forEach(function(ele, index, arr) {
+                    console.log(arr, 2);
+                    arr.unshift(ele);
+                })
+                // arr.unshift(textarea_value);
+            render();
+        };
+
+        function rightIn() {
+            var textarea_value = document.getElementById('block-textarea').value;
+            var arr2 = textarea_value.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(e) {
+                if (e != null && e.length > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            arr2.forEach(function(ele, index, arr) {
+                arr.push(ele);
+            })
+
+            render();
+        };
+
+        function leftOut() {
+            var o = arr.shift();
+            render();
+            alert(o);
+        };
+
+        function rightOut() {
+            var o = arr.pop();
+            render();
+            alert(o);
+        };
+
+        function blockClick() {
+            box.removeChild(this);
+            arr = [];
+            var block2 = document.getElementsByClassName('block');
+            for (var i = 0; i < block2.length; i++) {
+
+                arr.push(block2.item(i).innerText);
+            };
+            console.log(arr);
+            return arr;
+        };
+
+        left_in.addEventListener('click', leftIn);
+        right_in.addEventListener('click', rightIn);
+        left_Out.addEventListener('click', leftOut);
+        right_Out.addEventListener('click', rightOut);
+    </script>
+</body>
+
+</html>
