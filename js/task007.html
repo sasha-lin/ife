@@ -1,0 +1,141 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 07</title>
+    <style>
+        .flex {
+            display: flex;
+            padding: 20px;
+            justify-content: space-between;
+            overflow: auto;
+        }
+        
+        .flex-item {
+            margin-left: 10px;
+        }
+        
+        .inner {
+            width: 120px;
+            height: 120px;
+        }
+        
+        .flex,
+        .flex-item {
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex root">
+        <div class="flex flex-item">
+            <div class="flex flex-item">
+                <div class="flex-item inner"></div>
+                <div class="flex-item inner"></div>
+            </div>
+            <div class="flex flex-item">
+                <div class="flex-item inner"></div>
+                <div class="flex-item inner"></div>
+            </div>
+        </div>
+        <div class="flex flex-item">
+            <div class="flex flex-item">
+                <div class="flex-item inner"></div>
+                <div class="flex-item inner"></div>
+            </div>
+            <div class="flex flex-item">
+                <div class="flex-item inner"></div>
+                <div class="flex-item inner"></div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <button>前序</button>
+        <button>中序</button>
+        <button>后序</button>
+    </div>
+    <script>
+        var btn = document.getElementsByTagName('button'),
+            pre = btn[0],
+            inO = btn[1],
+            post = btn[2],
+            root = document.getElementsByClassName('root')[0],
+            nodeList = [],
+            timer = null;
+        window.onload = function() {
+            console.log(root);
+            pre.onclick = function() {
+                reset();
+                preOrder(root);
+                colorChange();
+            };
+            inO.onclick = function() {
+                reset();
+                inOrder(root);
+                colorChange();
+            };
+            post.onclick = function() {
+                reset();
+                postOrder(root);
+                colorChange();
+            };
+        }
+
+        function preOrder(node) {
+            if (!(node == null)) {
+                nodeList.push(node);
+                console.log(node);
+                preOrder(node.firstElementChild);
+                preOrder(node.lastElementChild);
+            }
+        };
+        //使用递归方式实现中序遍历
+        function inOrder(node) {
+            if (!(node == null)) {
+                inOrder(node.firstElementChild); //先访问左子树
+                nodeList.push(node); //再访问根节点
+                inOrder(node.lastElementChild); //最后访问右子树
+            }
+        };
+        //后序遍历
+        function postOrder(node) {
+            if (!(node == null)) {
+                postOrder(node.firstElementChild);
+                postOrder(node.lastElementChild);
+                nodeList.push(node);
+            }
+        };
+
+        function colorChange() {
+            var i = 0;
+            console.log(nodeList[i]);
+            nodeList[i].style.backgroundColor = 'lightpink';
+            timer = setInterval(function() {
+                i++;
+                if (i < nodeList.length) {
+                    nodeList[i - 1].style.backgroundColor = '#fff';
+                    nodeList[i].style.backgroundColor = 'lightpink';
+                } else {
+                    clearInterval(timer);
+                    nodeList[nodeList.length - 1].style.backgroundColor = '#fff';
+                }
+            }, 500)
+        }
+
+        function reset() {
+            nodeList = [];
+            clearInterval();
+            var divs = document.getElementsByTagName('div');
+            // divs.forEach(function(ele) {
+            //     ele.style.backgroundColor = '#fff';
+            // });
+            for (var i = 0; i < divs.length; i++) {
+                divs[i].style.backgroundColor = '#fff';
+            }
+        }
+    </script>
+</body>
+
+</html>
